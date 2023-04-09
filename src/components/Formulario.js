@@ -30,6 +30,12 @@ const Formulario = () => {
                         name="categoria"
                     >
                         <option value="">-- Selecciona Categoría --</option>
+                        {categorias.map(categoria => (
+                            <option 
+                                value={categoria.strCategory}
+                                key={categoria.strCategory}
+                            >{categoria.strCategory}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="col-md-4">
