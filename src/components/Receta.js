@@ -11,7 +11,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 350,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -29,6 +29,20 @@ const Receta = ({receta}) => {
 
     // extraer los valores del context
     const { informacion, guardarIdReceta, guardarReceta} = useContext(ModalContext);
+
+    // Muestra y formatea los ingredientes
+    const mostrarIngredientes = informacion => {
+        let ingredientes = []
+        for(let i = 1; i < 16; i++) {
+            if(informacion[`strIngredient${i}`]) {
+                ingredientes.push(
+                    <li>{ informacion[`strIngredient${i}`] }  { informacion[`strMeasure${i}`] }</li>
+                )
+            }
+        }
+        return ingredientes
+    }
+
 
     return ( 
         <div className="col-md-4 mb-3">
@@ -66,6 +80,11 @@ const Receta = ({receta}) => {
                                 {informacion.strInstructions}
 
                                 <img className="img-fluid mt-4" src={informacion.strDrinkThumb} />
+
+                                <h3>Ingredientes y cantidades</h3>
+                                <ul>
+                                    {mostrarIngredientes(informacion)}
+                                </ul>
                                 
                             </Typography>
                             </Box>
